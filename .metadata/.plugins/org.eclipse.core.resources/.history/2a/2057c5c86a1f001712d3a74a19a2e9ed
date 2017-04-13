@@ -1,0 +1,29 @@
+import java.util.Scanner;
+import java.security.SecureRandom;
+import java.math.BigInteger;
+
+public class Ctr {
+
+	static final String AB = "0123456789ABCDEF";
+	static SecureRandom rnd = new SecureRandom();
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int nonce = 0;
+
+		Scanner input = new Scanner(System.in);
+		String pi = input.nextLine();
+		String k = input.nextLine();
+		String hasil = randomString(32);
+		System.out.println(hasil);
+		// k = nonceGenerator();
+		// System.out.println(nonce);
+	}
+
+	public static String randomString(int len) {
+		StringBuilder sb = new StringBuilder(len);
+		for (int i = 0; i < len; i++)
+			sb.append(AB.charAt(rnd.nextInt(AB.length())));
+		return sb.toString();
+	}
+}

@@ -1,0 +1,17 @@
+import java.util.Scanner;
+
+public class Ctr {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int counter = 0;
+		String nonce = "";
+		
+		
+		Scanner input = new Scanner(System.in);
+		String pi = input.nextLine();
+		String k = input.nextLine();
+
+	}
+
+}

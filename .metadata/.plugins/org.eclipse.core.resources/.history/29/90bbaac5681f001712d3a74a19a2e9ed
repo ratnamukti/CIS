@@ -1,0 +1,24 @@
+import java.util.Scanner;
+import java.security.SecureRandom;
+import java.math.BigInteger;
+
+public class Ctr {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int nonce = 0;
+
+		Scanner input = new Scanner(System.in);
+		String pi = input.nextLine();
+		String k = input.nextLine();
+		
+		k = nonceGenerator();
+		System.out.println(k);
+	}
+
+	public static String nonceGenerator(){
+		SecureRandom random = new SecureRandom();
+		return new BigInteger(130, random).toString(64);	
+	}
+
+}

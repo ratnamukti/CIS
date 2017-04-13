@@ -1,0 +1,28 @@
+import java.util.Scanner;
+import java.security.SecureRandom;
+import java.math.BigInteger;
+import java.util.UUID;
+
+public class Ctr {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int nonce = 0;
+
+		Scanner input = new Scanner(System.in);
+		String pi = input.nextLine();
+		String k = input.nextLine();
+		
+		String uuid = UUID.randomUUID().toString();
+		System.out.println(uuid);
+		
+		//k = nonceGenerator();
+		//System.out.println(nonce);
+	}
+	/*
+	public static String nonceGenerator(){
+		SecureRandom random = new SecureRandom();
+		return new BigInteger(130, random).toString(64);	
+	}
+	 */
+}
