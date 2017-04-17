@@ -1,0 +1,42 @@
+import java.util.Scanner;
+import java.security.SecureRandom;
+import java.math.BigInteger;
+
+public class Ctr {
+
+	static final String AB = "0123456789ABCDEF";
+	static SecureRandom rnd = new SecureRandom();
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		byte[]  key = new byte[AES.BLOCK_SIZE];	/* 128-bit AES key */
+		byte[]  data = new byte[AES.BLOCK_SIZE]; 
+		AES	testAES;
+		byte[] result;
+		
+		Scanner input = new Scanner(System.in);
+		String pi = input.nextLine();
+		String k = input.nextLine();
+		
+		String nonce = randomString(32);
+		System.out.println(nonce);
+
+		byte[] call = Util.hex2byte(nonce);
+	    testAES = new AES();
+	    testAES.setKey(key);
+	    result = testAES.encrypt(data);
+	    
+	    // si plaintext di jadiin hex2byte
+	    // hasil tsb di XOR dengan hasil encrypt
+	    
+	    
+	}
+
+	public static String randomString(int len) {
+		StringBuilder sb = new StringBuilder(len);
+		for (int i = 0; i < len; i++)
+			sb.append(AB.charAt(rnd.nextInt(AB.length())));
+		return sb.toString();
+	}
+}
