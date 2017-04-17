@@ -358,7 +358,7 @@ class AES {
 	    if (traceLevel > 1)	traceInfo += " = "+Util.toHEX1(a);
         }
 
-        // last round is special - only has InvShiftRows, InvSubBytes and AddRoundKey
+        // last round is special - only has InvShiftRows, InvSubBytes and AddRounday
         Kdr = Kd[numRounds];			// get session keys for final round
 	if (traceLevel > 1)	traceInfo += "\n  R"+numRounds+" (Key = "+Util.toHEX1(Kdr)+")\t";
 
