@@ -1,0 +1,94 @@
+/*
+ * Aplikasi kalkulator untuk enkripsi & dekripsi plaintext menggunakan mode CTR. 
+ * 
+ * @author 	1306397904 - Desi Ratna Mukti & 
+ * 			1306464266 - Abidzar Gifari
+ * 
+ * */
+
+import java.util.Scanner;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import javax.crypto.*;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+
+public class Ctr {
+
+	static final String AB = "0123456789ABCDEF";
+	static SecureRandom rnd = new SecureRandom();
+
+	public static void main(String[] args) throws IOException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException {
+		// TODO Auto-generated method stub
+		
+		byte[]  key = new byte[AES.BLOCK_SIZE];	/* 128-bit AES key */
+		byte[]  nonce = new byte[AES.BLOCK_SIZE]; 
+		byte[] result;	
+		AES	testAES;
+		
+		// baca input plaintext dan ubah jadi byte
+		Path path = Paths.get("path/to/file");
+		byte[] plaintext = Files.readAllBytes(path);
+		
+		// baca input key dan ubah jadi byte
+		Scanner input = new Scanner(System.in);
+		String k = input.nextLine();
+		key = Util.hex2byte(k);
+		
+		// ambil random nonce dan ubah jadi byte
+		String rs = randomString(32);
+		nonce = Util.hex2byte(rs);
+		System.out.println(">>" + nonce);
+		
+		// enkripsi key dan nonce menggunakan AES
+	    //testAES = new AES();
+	    //testAES.setKey(key);
+	    //result = testAES.encrypt(nonce);
+	    
+	}
+		public void enkripsi(byte[] keyBytes, byte[] nonceBytes, byte[] plaintextBytes) throws Exception{
+	    // plaintext dibagi2 jadi block dulu tergantung opsi key (128, 192, 256 bit)
+	    SecretKeySpec keySecret = new SecretKeySpec(keyBytes, "AES");
+	    IvParameterSpec ivSpec = new IvParameterSpec(nonceBytes);
+	    Cipher c = Cipher.getInstance("AES/CTR/PKCS5PADDING");
+	    c.init(Cipher.ENCRYPT_MODE, keySecret, ivSpec);
+	    
+	    ByteArrayInputStream bIn = new ByteArrayInputStream(plaintextBytes);
+	    CipherInputStream cIn = new CipherInputStream(bIn, c);
+	    ByteArrayOutputStream bOut = new ByteArrayOutputStream();
+	    
+	    int ch;
+	    while ((ch = cIn.read()) >= 0) {
+	      bOut.write(ch);
+	    }
+
+	    byte[] cipherText = bOut.toByteArray();
+
+	    System.out.println("cipher: " + new String(cipherText));
+	    
+
+	    // pi panjangnya selalu sama no matter panjang key berapa
+	    // hasil encrypt aes-key di XOR dengan block2 plaintext
+		}    
+	
+
+	/* 
+	 * Method untuk membuat pseudorandom string untuk nonce
+	 * @param panjang string yang ingin dibangun
+	 * 
+	 */
+	public static String randomString(int len) {
+		StringBuilder sb = new StringBuilder(len);
+		for (int i = 0; i < len; i++)
+			sb.append(AB.charAt(rnd.nextInt(AB.length())));
+		return sb.toString();
+	}
+}
